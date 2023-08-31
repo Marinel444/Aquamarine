@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('slug', models.CharField(max_length=100, unique=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subcategory', to='shop.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subcategory', to='plumbing.category')),
             ],
             options={
                 'verbose_name': 'СубКатегория',
@@ -77,10 +77,10 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('update', models.DateTimeField(auto_now=True)),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='manufacturer', to='shop.brand')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category', to='shop.category')),
-                ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='country', to='shop.country')),
-                ('sub_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subcategory', to='shop.subcategory')),
+                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='manufacturer', to='plumbing.brand')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category', to='plumbing.category')),
+                ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='country', to='plumbing.country')),
+                ('sub_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subcategory', to='plumbing.subcategory')),
             ],
             options={
                 'verbose_name': 'Продукт',
@@ -93,7 +93,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='products/%Y/%m/%d/')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.product', verbose_name='Product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plumbing.product', verbose_name='Product')),
             ],
         ),
     ]

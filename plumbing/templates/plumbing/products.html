@@ -1,14 +1,15 @@
-{% extends 'shop/base.html' %}
+{% extends 'plumbing/base.html' %}
 {% block title %}AQUAMARINE{% endblock %}
 {% block content %}
 <div class="content-navigation">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plumbing'  %}">Сантехника</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ data.products.first.category.name }}</li>
         </ol>
     </nav>
 </div>
-{% if data.products %}
 <div class="content-carousel">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for product in data.products %}
@@ -29,8 +30,5 @@
         {% endfor %}
     </div>
 </div>
-{% else %}
-<h1 style="margin-left: 10%;">нет результатов</h1>
-{% endif %}
 
 {% endblock %}

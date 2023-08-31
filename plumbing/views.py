@@ -5,16 +5,16 @@ from django.db.models import Q
 
 
 def index(request):
-    return render(request, 'shop/home.html')
+    return render(request, 'plumbing/home.html')
 
 
 def plumbing(request):
     category = Category.objects.all()
-    return render(request, 'shop/plumbing.html', {'category': category})
+    return render(request, 'plumbing/plumbing.html', {'category': category})
 
 
 def tile(request):
-    return render(request, 'shop/tile.html')
+    return render(request, 'plumbing/tile.html')
 
 
 def product_plumbing(request, slug):
@@ -33,12 +33,12 @@ def product_plumbing(request, slug):
         'form': form,
         'products': products,
     }
-    return render(request, 'shop/products.html', {'data': data})
+    return render(request, 'plumbing/products.html', {'data': data})
 
 
 def product_page(request, product_article):
     product = Product.objects.filter(article=product_article).prefetch_related('photo_set').first()
-    return render(request, 'shop/product_plumbing.html', {'product': product})
+    return render(request, 'plumbing/product_plumbing.html', {'product': product})
 
 
 def add_post(request):
@@ -48,7 +48,7 @@ def add_post(request):
             form.save()
             return redirect('home')
     form = ProductAddForm()
-    return render(request, 'shop/add_post.html', {'form': form})
+    return render(request, 'plumbing/add_post.html', {'form': form})
 
 
 def search_view(request):
@@ -60,4 +60,4 @@ def search_view(request):
     data = {
         'products': products
     }
-    return render(request, 'shop/search.html', {'data': data})
+    return render(request, 'plumbing/search.html', {'data': data})
