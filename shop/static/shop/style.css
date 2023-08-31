@@ -1,0 +1,20 @@
+.content-carousel {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.img-cards {
+    width: 50%;
+    height: 100%;
+}
+
+.content-navigation {
+    margin-left: 2%;
+}
+
+.col a{
+    text-decoration: none;
+}
+.product-view img {
+    max-height: 500px;
+}

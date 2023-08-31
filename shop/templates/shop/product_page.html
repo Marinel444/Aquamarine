@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% block title %}AQUAMARINE{% endblock %}
+
+{% block content %}
+<div class="content-navigation">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plumbing'  %}">Сантехника</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shop' slug=product.category.slug %}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.article }}</li>
+        </ol>
+    </nav>
+</div>
+<div class="card mb-3" style="width:80%; margin-left: 10%;">
+  <img src="{{ product.photo_set.first.image.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text"></p>
+    <p class="card-text"><small class="text-body-secondary">Обновлено {{ product.update }}</small></p>
+  </div>
+</div>
+{% endblock %}

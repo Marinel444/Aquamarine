@@ -1,0 +1,36 @@
+{% extends 'shop/base.html' %}
+{% block title %}AQUAMARINE{% endblock %}
+{% block content %}
+<div class="content-navigation">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+        </ol>
+    </nav>
+</div>
+{% if data.products %}
+<div class="content-carousel">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in data.products %}
+        <div class="col">
+            <a href="{% url 'product' product_article=product.article %}">
+                <div class="card h-100">
+                    <img src="{{ product.photo_set.first.image.url }}" class="card-img-top" alt="..."
+                         style="height: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">Артикл: {{ product.article }} <br>Производитель: {{ product.brand }}<br> Страна: {{ product.country }}</p>
+                        <h4>{{ product.price }} грн</h4>
+                        <button type="button" class="btn btn-info">Купить</button>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<h1 style="margin-left: 10%;">нет результатов</h1>
+{% endif %}
+
+{% endblock %}
