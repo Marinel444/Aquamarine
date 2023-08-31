@@ -1,4 +1,4 @@
-{% extends 'plumbing/base.html' %}
+{% extends 'base.html' %}
 {% block title %}AQUAMARINE{% endblock %}
 {% block content %}
 <div class="content-navigation">
@@ -13,7 +13,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for item in category %}
         <div class="col">
-            <a href="{% url 'shop' slug=item.slug %}">
+            <a href="{% url 'plumbing_item' slug=item.slug %}">
                 <div class="card h-100">
                     <img src="{{ item.photo.url }}" class="card-img-top" alt="..."
                          style="height: 100%;">

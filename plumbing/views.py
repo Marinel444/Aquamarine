@@ -4,41 +4,33 @@ from .forms import ProductFilterForm, ProductAddForm
 from django.db.models import Q
 
 
-def index(request):
-    return render(request, 'plumbing/home.html')
-
-
 def plumbing(request):
     category = Category.objects.all()
     return render(request, 'plumbing/plumbing.html', {'category': category})
 
 
-def tile(request):
-    return render(request, 'plumbing/tile.html')
-
-
-def product_plumbing(request, slug):
+def products(request, slug):
     form = ProductFilterForm(request.GET)
-    products = Product.objects.filter(category__slug=slug).prefetch_related('photo_set').all()
+    products_item = Product.objects.filter(category__slug=slug).prefetch_related('photo_set').all()
     if form.is_valid():
         country = form.cleaned_data['country']
         brand = form.cleaned_data['brand']
 
         if country:
-            products = products.filter(country=country)
+            products_item = products_item.filter(country=country)
 
         if brand:
-            products = products.filter(manufacturer=brand)
+            products_item = products_item.filter(manufacturer=brand)
     data = {
         'form': form,
-        'products': products,
+        'products': products_item,
     }
     return render(request, 'plumbing/products.html', {'data': data})
 
 
 def product_page(request, product_article):
     product = Product.objects.filter(article=product_article).prefetch_related('photo_set').first()
-    return render(request, 'plumbing/product_plumbing.html', {'product': product})
+    return render(request, 'plumbing/product_page.html', {'product': product})
 
 
 def add_post(request):
@@ -49,15 +41,3 @@ def add_post(request):
             return redirect('home')
     form = ProductAddForm()
     return render(request, 'plumbing/add_post.html', {'form': form})
-
-
-def search_view(request):
-    query = request.GET.get('q')
-    if query:
-        products = Product.objects.filter(Q(name__icontains=query) | Q(article__icontains=query))
-    else:
-        products = Product.objects.all()
-    data = {
-        'products': products
-    }
-    return render(request, 'plumbing/search.html', {'data': data})

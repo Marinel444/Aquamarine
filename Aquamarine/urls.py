@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from plumbing.views import *
+from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -24,9 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='home'),
     path('santehnika/', plumbing, name='plumbing'),
-    path('plitka/', tile, name='tile'),
     path('add_post/', add_post, name='add_post'),
     path('search/', search_view, name='search_view_name'),
-    re_path(r'santehnika/(?P<slug>[\w-]+)/$', product_plumbing, name='plumbing'),
+    re_path(r'santehnika/(?P<slug>[\w-]+)/$', products, name='plumbing_item'),
     re_path(r'(?P<product_article>[\w\d-]+)/$', product_page, name='product'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
