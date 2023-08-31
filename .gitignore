@@ -6,3 +6,9 @@ db.sqlite3
 media/
 staticfiles/
 venv/
+.idea/
+.env
+.DS_Store
+shop/.DS_Store
+shop/static/.DS_Store
+shop/templates/.DS_Store
