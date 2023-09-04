@@ -5,7 +5,12 @@ from .forms import ProductFilterForm, ProductAddForm
 
 def plumbing(request):
     category = Category.objects.filter(is_for_plumbing=True).all()
-    return render(request, 'plumbing/plumbing.html', {'category': category})
+    return render(request, 'shop/plumbing.html', {'category': category})
+
+
+def tile(request):
+    category = Category.objects.filter(is_for_plumbing=False).all()
+    return render(request, 'shop/tile.html', {'category': category})
 
 
 def products(request, slug):
@@ -24,12 +29,12 @@ def products(request, slug):
         'form': form,
         'products': products_item,
     }
-    return render(request, 'plumbing/products.html', {'data': data})
+    return render(request, 'shop/products.html', {'data': data})
 
 
 def product_page(request, product_article):
     product = Product.objects.filter(article=product_article).prefetch_related('photo_set').first()
-    return render(request, 'plumbing/product_page.html', {'product': product})
+    return render(request, 'shop/product_page.html', {'product': product})
 
 
 def add_post(request):
@@ -39,4 +44,4 @@ def add_post(request):
             form.save()
             return redirect('home')
     form = ProductAddForm()
-    return render(request, 'plumbing/add_post.html', {'form': form})
+    return render(request, 'shop/add_post.html', {'form': form})

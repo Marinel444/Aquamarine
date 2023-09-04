@@ -43,10 +43,13 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <h3><br>{{ product.name }}</h3>
-        <h6 style="color:#504F4F;">
-            <br>Артикл: {{ product.article }}
-        </h6>
+        <div style="margin-left: 2%;">
+            <h3><br>{{ product.name }}</h3>
+            <h6 style="color:#504F4F;">
+                <br>Артикл: {{ product.article }}
+            </h6>
+        </div>
+        <hr>
         <div class="card-body">
             <h5 class="card-title">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -78,28 +81,28 @@
                             <div class="accordion-body">
                                 <h6 class="accordion-body">
                                     {% if product.sub_category %}
-                                    Тип смесителья: <b>{{ product.sub_category }}</b> <br> <br>
+                                    Тип: <b>{{ product.sub_category }}</b> <br> <br>
                                     <hr>
                                     {% endif %}
                                     {% if product.brand %}
                                     Производитель: <b>{{ product.brand }}</b> <br> <br>
-                                     <hr>
+                                    <hr>
                                     {% endif %}
                                     {% if product.country %}
                                     Страна: <b>{{ product.country }}</b> <br> <br>
-                                     <hr>
+                                    <hr>
                                     {% endif %}
                                     {% if product.size %}
                                     Размер: <b>{{ product.size }} mm</b> <br> <br>
-                                     <hr>
+                                    <hr>
                                     {% endif %}
                                     {% if product.color %}
-                                    Размер: <b>{{ product.color }}</b> <br> <br>
-                                     <hr>
+                                    Цвет: <b>{{ product.color }}</b> <br> <br>
+                                    <hr>
                                     {% endif %}
                                     {% if product.material %}
-                                    Размер: <b>{{ product.material }}</b> <br> <br>
-                                     <hr>
+                                    Material: <b>{{ product.material }}</b> <br> <br>
+                                    <hr>
                                     {% endif %}
                                 </h6>
                             </div>

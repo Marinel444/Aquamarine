@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from plumbing.models import Product
-from .models import Category
+from shop.models import Product
+from shop.models import Category
 from django.db.models import Q
 
 

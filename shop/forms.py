@@ -11,7 +11,7 @@ class ProductFilterForm(forms.Form):
 class ProductAddForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['category', 'sub_category','country','brand','name','article','description','size','stock','price']
+        fields = '__all__'
 
     images = MultiFileField(min_num=1, max_num=3, max_file_size=1024*1024*5)
 

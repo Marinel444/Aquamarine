@@ -9,6 +9,6 @@ venv/
 .idea/
 .env
 .DS_Store
-plumbing/.DS_Store
-plumbing/static/.DS_Store
-plumbing/templates/.DS_Store
+shop/.DS_Store
+shop/static/.DS_Store
+shop/templates/.DS_Store

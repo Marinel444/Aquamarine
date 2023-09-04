@@ -16,8 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from plumbing.views import *
-from tile.views import *
+from shop.views import *
 from common.views import *
 from django.conf.urls.static import static
 from django.conf import settings
