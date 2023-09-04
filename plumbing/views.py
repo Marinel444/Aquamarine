@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import ProductFilterForm, ProductAddForm
-from django.db.models import Q
 
 
 def plumbing(request):
-    category = Category.objects.all()
+    category = Category.objects.filter(is_for_plumbing=True).all()
     return render(request, 'plumbing/plumbing.html', {'category': category})
 
 

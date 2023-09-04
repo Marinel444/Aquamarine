@@ -12,7 +12,9 @@
             </div>
             {% for category in categories %}
             <div class="carousel-item">
+                <a href="{% url 'plumbing_item' slug=category.slug %}">
                 <img src="{{ category.photo.url }}" class="d-block w-100" alt="...">
+                </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h2>{{ category.name }}</h2>
                 </div>
