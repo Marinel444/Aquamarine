@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import ProductFilterForm, ProductAddForm
+from shop.forms.forms import ProductAddForm
+from shop.forms.filters import tile_filters, plumbing_filters
 
 
 def plumbing(request):
@@ -14,17 +15,23 @@ def tile(request):
 
 
 def products(request, slug):
-    form = ProductFilterForm(request.GET)
     products_item = Product.objects.filter(category__slug=slug).prefetch_related('photo_set').all()
-    if form.is_valid():
-        country = form.cleaned_data['country']
-        brand = form.cleaned_data['brand']
-
-        if country:
-            products_item = products_item.filter(country=country)
-
-        if brand:
-            products_item = products_item.filter(manufacturer=brand)
+    if products_item:
+        if products_item[0].category.is_for_plumbing:
+            form = plumbing_filters.PlumbingCategoryForm(category_slug=products_item[0].category.slug, data=request.GET)
+        else:
+            form = tile_filters.TileFilterForm(request.GET)
+    else:
+        form = None
+    if form:
+        if form.is_valid():
+            slug = form.cleaned_data.get('category')
+            if slug:
+                products_item = products_item.filter(sub_category__slug=slug)
+            else:
+                size = form.cleaned_data.get('size')
+                if size:
+                    products_item = products_item.filter(size=size)
     data = {
         'form': form,
         'products': products_item,
