@@ -12,3 +12,6 @@ venv/
 shop/.DS_Store
 shop/static/.DS_Store
 shop/templates/.DS_Store
+
+data.json
+generator_json.py

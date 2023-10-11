@@ -14,10 +14,12 @@
         </ol>
     </nav>
 </div>
+{% if data.form %}
 <form method="get">
     {{ data.form.as_p }}
-    <input type="submit" value="Фильтровать">
+    <button type="submit" class="btn btn-success">Фильтроват</button>
 </form>
+{% endif %}
 <div class="content-carousel">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for product in data.products %}

@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import *
-from shop.forms.forms import ProductAddForm
+from shop.forms.forms import ProductAddForm, MultiProductAddForm
 from shop.forms.filters import tile_filters, plumbing_filters
+from django.core.files.base import ContentFile
+
+import json
+import requests
 
 
 def plumbing(request):
@@ -52,3 +56,47 @@ def add_post(request):
             return redirect('home')
     form = ProductAddForm()
     return render(request, 'shop/add_post.html', {'form': form})
+
+
+def add_posts(request):
+    if request.method == 'POST':
+        form = MultiProductAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            json_file = form.cleaned_data["json_file"]
+            json_file.seek(0)
+            data_string = json_file.read().decode('utf-8')
+            data = json.loads(data_string)
+            for product_data in data.get('Products', []):
+                category = Category.objects.get(name=product_data["category"])
+                sub_category = Subcategory.objects.get(name=product_data["sub_category"])
+                country = Country.objects.get(name=product_data["country"])
+                brand = Brand.objects.get(name=product_data["brand"])
+                product = Product.objects.create(
+                    category=category,
+                    sub_category=sub_category,
+                    country=country,
+                    brand=brand,
+                    name=product_data["name"],
+                    article=product_data["article"],
+                    description=product_data['description'],
+                    size=product_data['size'],
+                    color=product_data['color'],
+                    material=product_data['material'],
+                    stock=1,
+                    price=product_data['price'],
+                )
+
+                for photo_url in product_data["photos"]:
+                    response = requests.get(photo_url)
+                    if response.status_code == 200:
+                        file_name = photo_url.split("/")[-1]
+                        photo = Photo(product=product)
+                        photo.image.save(file_name, ContentFile(response.content))
+                        photo.save()
+
+            return render(request, 'shop/add_posts.html', {'form': form, 'msg': 'Товар добавлен'})
+
+    else:
+        form = MultiProductAddForm()
+
+    return render(request, 'shop/add_posts.html', {'form': form})

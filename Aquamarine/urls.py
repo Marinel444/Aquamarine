@@ -26,6 +26,7 @@ urlpatterns = [
     path('', index, name='home'),
     path('santehnika/', plumbing, name='plumbing'),
     path('add_post/', add_post, name='add_post'),
+    path('add_posts/', add_posts, name='add_posts'),
     path('search/', search_view, name='search_view_name'),
     path('plitka/', tile, name='tile'),
     re_path(r'santehnika/(?P<slug>[\w-]+)/$', products, name='plumbing_item'),
